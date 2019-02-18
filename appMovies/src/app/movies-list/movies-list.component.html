@@ -1,0 +1,47 @@
+<app-edit-popup 
+*ngIf="togglePopup" 
+(change)="closePopup($event)" 
+[allMovieData]="getAllMovieData"
+(click)="updateMovie($event)"
+></app-edit-popup>
+
+<app-delete-popup 
+*ngIf="toggleDeletPopup"
+(change)="closePopup($event)" 
+(click)="removeThisMovie($event)"
+[movieDelete]="movieDelete"
+></app-delete-popup>
+
+<app-add-movie
+*ngIf="toggleAddMovie"
+(change)="closePopup($event)"
+(click)="addNewMovies($event)"
+></app-add-movie>
+<div *ngIf="isAlert" class="alert"> 
+    <p>{{errorForm}}</p>
+</div>
+
+<button class="add-new-movies" (click)="openAddMoviePopup()">Add new movie</button>
+<div class="wrapper-movies">
+  <ul>
+    <li *ngFor="let movie of movies">
+      <div>
+          <img src="{{movie.Poster}}">
+      </div>
+      <div class="content-movie">
+        <p class="title">{{movie.Title}}<span class="detailes">&nbsp;&nbsp;({{movie.Year}})</span></p>
+        <button class="read-more" (click)=readMore(movie.imdbID)>Read more</button>
+        <div class="detailes" *ngIf="movie.imdbID == checkMovieId">
+          <div class="detailes" *ngFor="let detaile of allDetailesMovies | keys">
+        {{detaile.key}}: {{detaile.value}}
+          </div>
+        </div>
+        <div class="wrapper-btn">
+            <button class="button" (click)="openEditMoviePopup(movie.imdbID);">Edit</button>
+            <button class="button" (click)="deleteThisMovie(movie)">Delete</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+

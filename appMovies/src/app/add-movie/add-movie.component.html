@@ -1,0 +1,15 @@
+<div class="wrapper-popup">
+  <div class="content">
+    <form [formGroup]='form' (ngSubmit)="addMovie()" novalidate #myform="ngForm">
+        <input type="text" formControlName='movieName'>
+        <div *ngIf="myform.submitted">
+            <p *ngIf="form.get('movieName').hasError('required')" class="form-ext-error">Movie name is required</p>
+            <p *ngIf="form.get('movieName').hasError('minlength')" class="form-ext-error">Write minimum 2 letters</p>
+      </div>
+      <div class="wrapper-add-movie">
+          <button class="button form-btn" type="submit">Send</button>
+          <button class="button form-btn" (click)="closeAddMoviePopup()">Close</button>
+      </div>
+    </form>
+  </div>
+</div>

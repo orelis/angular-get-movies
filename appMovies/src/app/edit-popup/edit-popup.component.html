@@ -1,0 +1,45 @@
+<div class="wrapper-popup">
+  <div class="content">
+      <form [formGroup]='form' (ngSubmit)="updateMovie()" novalidate #myform="ngForm">
+
+        <label>Title:</label> 
+        <input type="text" formControlName='title'><br>
+        <div *ngIf="form.get('title').hasError('required') && myform.submitted">
+            <p class="form-ext-error">Title is required</p>
+        </div>
+        
+        <label>Year: </label> 
+        <input type="text" formControlName='year'><br>
+        <div *ngIf="myform.submitted">
+              <p *ngIf="form.get('year').hasError('required')" class="form-ext-error">Year is required</p>
+              <p *ngIf="form.get('year').hasError('minlength')" class="form-ext-error">Write four digits of the year</p>
+              <p *ngIf="form.get('year').hasError('maxlength')" class="form-ext-error">Write four digits of the year</p>
+              <p *ngIf="form.get('year').hasError('pattern')" class="form-ext-error">No letters</p>
+        </div>
+
+        <label>Runtime:</label> 
+        <input type="text" formControlName='runtime'><br>
+        <div *ngIf="form.get('runtime').hasError('required') && myform.submitted">
+            <p class="form-ext-error">Runtime is required</p>
+        </div>
+
+        <label>Genre:</label> 
+        <input type="text" formControlName='genre'><br>
+        <div *ngIf="form.get('genre').hasError('required') && myform.submitted">
+            <p class="form-ext-error">Genre is Genre</p>
+        </div>
+
+        <label>Director:</label>
+        <input type="text" formControlName='director'><br>
+        <div *ngIf="form.get('director').hasError('required') && myform.submitted">
+            <p class="form-ext-error">Director is required</p>
+        </div>
+
+        <div class="wrapper-form-btn">
+            <button class="button form-btn" type="submit">Update</button>
+            <button class="button form-btn" (click)="closePopup()">close</button>
+        </div> 
+    </form>
+      
+  </div>
+</div>
